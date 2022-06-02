@@ -1,24 +1,19 @@
-const d = function getMonth() {
-today = new Date()
-var day = today.getMonth();
-    console.log(day);
+const printDate = function() {
+    let currentDate = new Date()
+    console.log(currentDate)    
 }
-d()
 
+const printMonth = function() {
+    let currentdate = new Date()
+    let currentMonth = currentdate.getMonth() + 1
+    console.log('The current month is '+currentMonth)
+}
 
-const D = function getDay() {
-    today = new Date()
-    var day = today.getDay();
-        console.log(day);
-    }
-    D()
+const getBatchInfo = function() {
+  let batchInformation = 'Radon, W3D4, the topic for today is Nodejs module system assignment discussion'
+  console.log(batchInformation)
+}
 
-
-    const B = function getBatchInfo(){
-        console.log("Roadon, W3D1, the topic for today is Nodejs module system")
-    }
-    B()
-
-module.exports.d = d
-module.exports.B = B
-module.exports.D = D
+module.exports.printDate = printDate
+module.exports.getCurrentMonth = printMonth
+module.exports.getCohortData = getBatchInfo
