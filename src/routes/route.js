@@ -15,12 +15,18 @@ router.get('/test-me', function (req, res) {
     externalModuless.case1
     externalModuless.case2
     externalModuless.case3
+   
+    res.send('My first ever api!')
+});
+
+
+router.get('/hello', function (req, res) {
+
     Array.months  
     Array.number
     Array.unique
     Array.object
-    res.send('My first ever api!')
+    res.send('My first router API')
 });
-
 
 module.exports = router;
