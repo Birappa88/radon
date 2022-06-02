@@ -9,14 +9,14 @@ const router = express.Router();
 router.get('/test-me', function (req, res) {
     
     externalModule.welcome()
-    externalModules.d()
-    externalModules.B()
-    externalModules.D()
+    externalModules.printDate()
+    externalModules.printMonth()
+    externalModules.getBatchInfo()
     externalModuless.case1
     externalModuless.case2
     externalModuless.case3
     res.send('My first ever api!')
 });
 
-gi
+
 module.exports = router;
