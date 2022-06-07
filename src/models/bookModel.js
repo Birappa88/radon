@@ -8,10 +8,10 @@ const bookSchema = new mongoose.Schema({
     },
     authorName: String,
     tags: [String],
-    prices: [
-        {indianPrice: String},
-        {europePrice: String}
-    ],
+    prices: {
+        indianPrice: String,
+        europePrice: String 
+    },
     year: {
         type: Number,
         default: 2021

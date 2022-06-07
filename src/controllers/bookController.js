@@ -21,7 +21,8 @@ const bookList= async function (req, res) {
 
 
 const getBooksInYear= async function (req, res) {
-    let allBooks= await BookModel.find(req.body)
+    let data = req.body.year
+    let allBooks= await BookModel.find({year:data})
     res.send({msg: allBooks})
 }
 
@@ -32,8 +33,8 @@ const getParticularBooks= async function (req, res) {
 }
 
 
-const getXINRBook= async function (req, res) {
-    let allBooks= await BookModel.find({prices:{[indianPrice]: "500INR"}})
+const getINRBook= async function (req, res) {
+    let allBooks= await BookModel.find({"prices.indianPrice":{$in:["100INR","200INR","500INR"]}})
     res.send({msg: allBooks})
 }
 
@@ -51,7 +52,7 @@ module.exports.getBooksData= getBooksData
 module.exports.bookList= bookList
 module.exports.getBooksInYear= getBooksInYear
 module.exports.getParticularBooks= getParticularBooks
-module.exports.getXINRBook= getXINRBook
+module.exports.getINRBook= getINRBook
 module.exports.getRandomBooks= getRandomBooks
 
 
