@@ -18,14 +18,17 @@ const createPublisher = async function (req, res) {
 
 const createBook = async function (req, res) {
     let book = req.body
-    let authorId = req.body.author
+    let authorIdd = req.body.author
     let publisherId = req.body.publisher
+    console.log( authorIdd)
 
-    if (!authorId) res.send({ error: "author Id is required" })
+    if (!authorIdd) res.send({ error: "author Id is required" })
 
-    const authorInfo = await AuthorModel.findById(authorId)
+    const authorInfo = await AuthorModel.findById(authorIdd)
+    console.log(authorInfo)
     if (!authorInfo) res.send({ error: "enter valid author Id" })
 
+console.log(typeof authorInfo._id.toString())
     if (!publisherId) res.send({ error: "publisher Id is required" })
 
     const publisherInfo = await PublisherModel.findById(publisherId)
