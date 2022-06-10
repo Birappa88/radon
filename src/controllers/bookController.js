@@ -25,6 +25,7 @@ const createBook = async function (req, res) {
 
     const authorInfo = await AuthorModel.findById(authorId)
     if (!authorInfo) res.send({ error: "enter valid author Id" })
+
     if (!publisherId) res.send({ error: "publisher Id is required" })
 
     const publisherInfo = await PublisherModel.findById(publisherId)
@@ -36,11 +37,9 @@ const createBook = async function (req, res) {
 
 
 const getBooksWithAuthorPublisher = async function (req, res) {
-    let specificBook = await BookModel.find().populate(['author', 'publisher'])
+    let specificBook = await BookModel.findOne().populate(['author', 'publisher'])
     res.send({ data: specificBook })
 }
-
-
 
 
 
