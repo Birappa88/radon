@@ -18,17 +18,15 @@ const createPublisher = async function (req, res) {
 
 const createBook = async function (req, res) {
     let book = req.body
-    let authorIdd = req.body.author
+    let authorId = req.body.author
     let publisherId = req.body.publisher
-    console.log( authorIdd)
 
-    if (!authorIdd) res.send({ error: "author Id is required" })
+    if (!authorId) res.send({ error: "author Id is required" })
 
-    const authorInfo = await AuthorModel.findById(authorIdd)
-    console.log(authorInfo)
+    const authorInfo = await AuthorModel.findById(authorId)
+    console.log(authorInfo._id.toString())
     if (!authorInfo) res.send({ error: "enter valid author Id" })
 
-console.log(typeof authorInfo._id.toString())
     if (!publisherId) res.send({ error: "publisher Id is required" })
 
     const publisherInfo = await PublisherModel.findById(publisherId)
@@ -45,9 +43,33 @@ const getBooksWithAuthorPublisher = async function (req, res) {
 }
 
 
+const isHardCoverTrue = async function (req, res) {
 
+ let publishersId1 = await PublisherModel.findOne({name:["Penguin"]})
+ let publishersId2 = await PublisherModel.findOne({name:["HarperCollins"]})
+
+    let trueValue = await BookModel.updateMany(
+        {publisher: [publishersId1._id.toString(),publishersId2._id.toString()]},
+        {isHardCover: true}
+    )
+    res.send({updatedData: trueValue})
+}
+
+const updateBookPriceBy10 = async function (req, res) {
+
+let BestAuthors = await AuthorModel.find({rating: {$gt: 3.5}}).select({_id:1})
+let AuthorArray = BestAuthors.map((Object) => { return Object._id.toString()})
+
+let updatedPrice = await BookModel.updateMany(
+    {author: AuthorArray},
+    {$inc: {price:10}}
+)
+res.send({updatedData: updatedPrice})
+}
 
 module.exports.createAuthor = createAuthor
 module.exports.createBook = createBook
 module.exports.createPublisher = createPublisher
 module.exports.getBooksWithAuthorPublisher = getBooksWithAuthorPublisher
+module.exports.isHardCoverTrue = isHardCoverTrue
+module.exports.updateBookPriceBy10 = updateBookPriceBy10
