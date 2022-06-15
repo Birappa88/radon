@@ -7,11 +7,12 @@ router.post("/users", userController.createUser  )
 
 router.post("/login", userController.loginUser)
 
-router.get("/users/:userId", Auth.middleware, userController.getUserData)
+router.get("/users/:userId", Auth.authenticate, Auth.authorise, userController.getUserData)
 
-router.put("/users/:userId", Auth.middleware, userController.updateUser)
+router.put("/users/:userId", Auth.authenticate, Auth.authorise, userController.updateUser)
 
-router.delete("/users/:userId", Auth.middleware, userController.deleteUser)
+router.delete("/users/:userId", Auth.authenticate, Auth.authorise, userController.deleteUser)
 
+router.post("/users/:userId/posts", Auth.authenticate, Auth.authorise, userController.postMessage)
 
 module.exports = router;
